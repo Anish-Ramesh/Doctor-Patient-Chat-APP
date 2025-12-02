@@ -84,7 +84,7 @@ const PrescriptionDialog: React.FC<PrescriptionDialogProps> = ({ open, onClose, 
               }}
             >
               <Grid container spacing={1} alignItems="center">
-                <Grid size={5}>
+                <Grid item xs={12} sm={5}>
                   <TextField
                     fullWidth
                     label="Medicine"
@@ -93,7 +93,7 @@ const PrescriptionDialog: React.FC<PrescriptionDialogProps> = ({ open, onClose, 
                     size="small"
                   />
                 </Grid>
-                <Grid size={4}>
+                <Grid item xs={12} sm={4}>
                   <TextField
                     fullWidth
                     label="Dosage"
@@ -103,7 +103,7 @@ const PrescriptionDialog: React.FC<PrescriptionDialogProps> = ({ open, onClose, 
                     size="small"
                   />
                 </Grid>
-                <Grid size={3}>
+                <Grid item xs={12} sm={3}>
                   <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                     <FormControlLabel
                       control={
