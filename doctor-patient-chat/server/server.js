@@ -40,10 +40,20 @@ app.use(cors(corsOptions));
 app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
-// Connect to MongoDB
+// Connect to MongoDB and start server
 mongoose.connect(process.env.MONGODB_URI)
-.then(() => {})
-.catch(err => console.error('MongoDB connection error:', err));
+  .then(() => {
+    console.log('MongoDB connected');
+
+    const PORT = process.env.PORT || 5000;
+    server.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
+    });
+  })
+  .catch(err => {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  });
 
 // Test endpoint
 app.get('/api/auth/test', (req, res) => {
@@ -61,6 +71,15 @@ app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/chat', chatRoutes);
 app.use('/api/speech', speechRoutes);
+
+// Serve React frontend build (client) for all non-API routes
+const clientBuildPath = path.join(__dirname, '..', 'client', 'build');
+app.use(express.static(clientBuildPath));
+
+// Catch-all for frontend routes: use a regex to avoid path-to-regexp '*' issue
+app.get(/^(?!\/api).*/, (req, res) => {
+  res.sendFile(path.join(clientBuildPath, 'index.html'));
+});
 
 // Multer config for file uploads
 const storage = multer.diskStorage({
@@ -233,6 +252,3 @@ io.on('connection', (socket) => {
   socket.on('disconnect', () => {
   });
 });
-
-const PORT = process.env.PORT || 5000;
-server.listen(PORT);

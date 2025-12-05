@@ -1,5 +1,5 @@
-// API Base URL - update this in production
-export const API_BASE_URL = 'http://localhost:5001/api';
+// API Base URL - when frontend and backend are served from the same origin (e.g. on Railway)
+export const API_BASE_URL = '/api';
 
 // WebSocket URL - update this in production
 export const WS_BASE_URL = 'ws://localhost:5001';

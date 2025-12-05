@@ -318,7 +318,7 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
               position: 'relative',
             }}
           >
-            {message.prescription ? (
+            {message.prescription && message.prescription.medications && message.prescription.medications.length > 0 ? (
               <Box sx={{ minWidth: 260 }}>
                 <Typography variant="subtitle2" sx={{ fontWeight: 700, mb: 0.5 }}>
                   Prescription
@@ -415,12 +415,6 @@ const ChatMessage: React.FC<ChatMessageProps> = (props) => {
                 {message.isTranslated && (
                   <Collapse in={showTranslation}>
                     <Box sx={{ mt: 1, pt: 1, borderTop: `1px solid ${isOwnMessage ? 'rgba(255, 255, 255, 0.2)' : 'rgba(0, 0, 0, 0.1)'}` }}>
-                      <Stack direction="row" justifyContent="flex-end" alignItems="center" spacing={0.5} sx={{ mt: 0.5 }}>
-              <Typography variant="caption" sx={{ color: isOwnMessage ? 'primary.contrastText' : 'text.secondary', opacity: 0.8 }}>
-                {formatTime(message.createdAt)}
-              </Typography>
-              {isOwnMessage && getStatusIcon()}
-            </Stack>
                       <Typography variant="body2">
                         {message.content}
                       </Typography>

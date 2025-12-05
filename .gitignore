@@ -1,0 +1,7 @@
+# Node modules
+doctor-patient-chat/client/node_modules/
+doctor-patient-chat/server/node_modules/
+node_modules/
+
+# Build artifacts
+doctor-patient-chat/client/build/
